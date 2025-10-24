@@ -1,37 +1,104 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-// Importamos AMBAS funciones de nuestra lógica
 import { romanToArabic, arabicToRoman } from '../lib/Convertidor';
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
-  // Leemos los parámetros de la URL (?roman=... o ?arabic=...)
+  // CORS headers (opcional pero recomendado)
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Manejo de preflight request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  // Solo acepta GET requests
+  if (req.method !== 'GET') {
+    return res.status(405).json({ 
+      error: 'Método no permitido. Usa GET.' 
+    });
+  }
+
   const { roman, arabic } = req.query;
 
+  // Log para debugging (visible en Vercel logs)
+  console.log('Request received:', { roman, arabic, method: req.method });
+
   // Ruta 1: Convertir de Romano a Arábigo
-  if (typeof roman === 'string') {
+  if (roman) {
+    if (typeof roman !== 'string') {
+      return res.status(400).json({ 
+        error: 'El parámetro "roman" debe ser una cadena de texto.' 
+      });
+    }
+
     try {
       const arabicNumber = romanToArabic(roman);
-      return res.status(200).json({ input: roman, result: arabicNumber });
+      console.log(`Conversión exitosa: ${roman} → ${arabicNumber}`);
+      
+      return res.status(200).json({ 
+        input: roman.toUpperCase(), 
+        result: arabicNumber,
+        type: 'roman-to-arabic'
+      });
     } catch (error) {
-      const message = (error instanceof Error) ? error.message : 'Error al procesar.';
-      return res.status(400).json({ error: message });
+      console.error('Error en conversión romano→arábigo:', error);
+      const message = (error instanceof Error) 
+        ? error.message 
+        : 'Error desconocido al procesar.';
+      
+      return res.status(400).json({ 
+        error: message,
+        input: roman
+      });
     }
   }
 
   // Ruta 2: Convertir de Arábigo a Romano
-  if (typeof arabic === 'string') {
-    const num = parseInt(arabic, 10);
-    if (isNaN(num)) {
-      return res.status(400).json({ error: 'El valor arábigo debe ser un número.' });
+  if (arabic) {
+    if (typeof arabic !== 'string') {
+      return res.status(400).json({ 
+        error: 'El parámetro "arabic" debe ser un número.' 
+      });
     }
+
+    const num = parseInt(arabic, 10);
+    
+    if (isNaN(num)) {
+      return res.status(400).json({ 
+        error: 'El valor arábigo debe ser un número válido.',
+        input: arabic
+      });
+    }
+
     try {
       const romanNumber = arabicToRoman(num);
-      return res.status(200).json({ input: num, result: romanNumber });
+      console.log(`Conversión exitosa: ${num} → ${romanNumber}`);
+      
+      return res.status(200).json({ 
+        input: num, 
+        result: romanNumber,
+        type: 'arabic-to-roman'
+      });
     } catch (error) {
-      const message = (error instanceof Error) ? error.message : 'Error al procesar.';
-      return res.status(400).json({ error: message });
+      console.error('Error en conversión arábigo→romano:', error);
+      const message = (error instanceof Error) 
+        ? error.message 
+        : 'Error desconocido al procesar.';
+      
+      return res.status(400).json({ 
+        error: message,
+        input: num
+      });
     }
   }
 
-  // Si no se provee ninguno
-  return res.status(400).json({ error: "Parámetro no válido. Usa 'roman' o 'arabic'." });
+  // Si no se provee ningún parámetro
+  return res.status(400).json({ 
+    error: "Parámetros faltantes. Usa 'roman' o 'arabic'.",
+    examples: {
+      'romano-a-arabigo': '/api/index?roman=XIV',
+      'arabigo-a-romano': '/api/index?arabic=14'
+    }
+  });
 }

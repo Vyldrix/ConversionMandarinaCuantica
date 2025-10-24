@@ -1,19 +1,29 @@
 {
-  "name": "conversionmandarinacuantica",
+  "name": "conversor-romano-arabigo",
   "version": "1.0.0",
-  "description": "",
-  "main": "jest.config.js",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  },
- "scripts": {
-  "test": "jest",
-  "test:watch": "jest --watch"
-},
-  "keywords": [],
+  "description": "Aplicación web para convertir números romanos a arábigos y viceversa",
+  "main": "api/index.ts",
   "author": "Loyola Lautaro",
   "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "dev": "vercel dev",
+    "build": "tsc",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "roman-numerals",
+    "converter",
+    "typescript",
+    "vercel",
+    "roman",
+    "arabic"
+  ],
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^24.9.1",
@@ -21,5 +31,20 @@
     "jest": "^30.2.0",
     "ts-jest": "^29.4.5",
     "typescript": "^5.9.3"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/test/**/*.test.ts"
+    ],
+    "collectCoverageFrom": [
+      "lib/**/*.ts",
+      "api/**/*.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
+
