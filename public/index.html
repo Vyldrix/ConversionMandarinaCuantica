@@ -3,35 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor Romano/Arábigo</title>
+    <title>Conversor Romano ⇄ Arábigo</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="roman-background">
+        <div class="pillar pillar-left"></div>
+        <div class="pillar pillar-right"></div>
+    </div>
+    
+    <header class="header">
+        <h1 class="main-title">
+            <span class="latin-text">CONVERSOR</span>
+            <span class="subtitle">Numerorum Romanorum</span>
+        </h1>
+    </header>
+
     <div class="container">
         <div class="converter-box">
-            <h1>Romano a Arábigo</h1>
-            <p>Escribe un número romano (ej: XIV, MCMXCIX).</p>
+            <div class="box-header">
+                <h2>Romano → Arábigo</h2>
+                <div class="roman-ornament">✦</div>
+            </div>
+            <p class="description">Introduce numerales romanos como <strong>XIV</strong>, <strong>MCMXCIX</strong> o <strong>MMXXIV</strong></p>
             <div class="input-group">
-                <input type="text" id="romanInput" placeholder="Ej: XIV">
-                <button id="toArabicButton">Convertir</button>
+                <input 
+                    type="text" 
+                    id="romanInput" 
+                    placeholder="Ej: MDCCLXXVI"
+                    maxlength="15"
+                    autocomplete="off"
+                >
+                <button id="toArabicButton" class="convert-btn">
+                    <span>Convertir</span>
+                    <span class="arrow">→</span>
+                </button>
             </div>
             <div class="result-area">
-                <h2>Resultado: <span id="arabicResultText">...</span></h2>
+                <div class="result-label">Resultado:</div>
+                <div class="result-value" id="arabicResultText">Awaiting input...</div>
             </div>
         </div>
 
+        <div class="divider">
+            <div class="divider-ornament">⚜</div>
+        </div>
+
         <div class="converter-box">
-            <h1>Arábigo a Romano</h1>
-            <p>Escribe un número arábigo (ej: 4, 1999).</p>
+            <div class="box-header">
+                <h2>Arábigo → Romano</h2>
+                <div class="roman-ornament">✦</div>
+            </div>
+            <p class="description">Introduce números entre <strong>1</strong> y <strong>3999</strong></p>
             <div class="input-group">
-                <input type="number" id="arabicInput" placeholder="Ej: 1999" min="1" max="3999">
-                <button id="toRomanButton">Convertir</button>
+                <input 
+                    type="number" 
+                    id="arabicInput" 
+                    placeholder="Ej: 1776" 
+                    min="1" 
+                    max="3999"
+                    autocomplete="off"
+                >
+                <button id="toRomanButton" class="convert-btn">
+                    <span>Convertir</span>
+                    <span class="arrow">→</span>
+                </button>
             </div>
             <div class="result-area">
-                <h2>Resultado: <span id="romanResultText">...</span></h2>
+                <div class="result-label">Resultado:</div>
+                <div class="result-value" id="romanResultText">Awaiting input...</div>
             </div>
         </div>
     </div>
+
+    <footer class="footer">
+        <p class="latin-quote">"Non scholae sed vitae discimus"</p>
+        <p class="quote-translation">No aprendemos para la escuela, sino para la vida</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
