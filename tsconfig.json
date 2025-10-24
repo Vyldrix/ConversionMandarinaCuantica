@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2020",
+    "outDir": ".vercel/output/functions", // Directorio de salida (manejado por Vercel)
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "api/**/*.ts", // Incluye la API
+    "lib/**/*.ts"  // Incluye la Lógica
+  ],
+  "exclude": [
+    "node_modules",
+    "test" // Excluimos los tests de la compilación
+  ]
+}

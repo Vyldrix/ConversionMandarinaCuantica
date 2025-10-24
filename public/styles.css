@@ -1,0 +1,76 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea arriba */
+    min-height: 100vh;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding-top: 2rem;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que se apilen en pantallas chicas */
+    justify-content: center;
+    gap: 2rem;
+    width: 90%;
+    max-width: 900px;
+}
+.converter-box {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    flex: 1; /* Ocupan espacio flexible */
+    min-width: 300px; /* Ancho mínimo antes de apilarse */
+}
+h1 {
+    color: #2c3e50;
+    margin-top: 0;
+}
+p {
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+}
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+input:focus {
+    border-color: #3498db;
+}
+button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #2980b9;
+}
+.result-area {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #ecf0f1;
+    border-radius: 8px;
+}
+.result-area span {
+    color: #2c3e50;
+    font-weight: bold;
+}

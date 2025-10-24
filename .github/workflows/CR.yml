@@ -1,0 +1,39 @@
+name: Pruebas (CI)
+
+# Se ejecuta en cada 'push' o 'pull request' a la rama 'main'
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # El "job" se llama "build-and-test"
+  build-and-test:
+    # Se ejecuta en una máquina virtual de Ubuntu
+    runs-on: ubuntu-latest
+    
+    # Prueba en dos versiones de Node.js
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      # 1. Descarga tu código
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      # 2. Configura la versión de Node.js
+      - name: Usar Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      # 3. Instala las dependencias
+      - name: Instalar dependencias
+        run: npm install
+
+      # 4. Ejecuta las pruebas (el comando de tu package.json)
+      - name: Ejecutar pruebas (Jest)
+        run: npm test

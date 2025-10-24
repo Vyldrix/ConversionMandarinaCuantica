@@ -1,0 +1,16 @@
+# Dependencias
+/node_modules
+
+# Archivos de build de Vercel
+/.vercel
+/dist
+/build
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de Sistema
+.DS_Store
+.vercel

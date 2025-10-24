@@ -1,0 +1,25 @@
+{
+  "name": "conversionmandarinacuantica",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jest.config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+ "scripts": {
+  "test": "jest",
+  "test:watch": "jest --watch"
+},
+  "keywords": [],
+  "author": "Loyola Lautaro",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.9.1",
+    "@vercel/node": "^5.5.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.5",
+    "typescript": "^5.9.3"
+  }
+}
