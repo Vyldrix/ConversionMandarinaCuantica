@@ -1,10 +1,10 @@
-import { romanToArabic, arabicToRoman, isValidRoman, isValidArabic } from '../../lib/Convertidor';
+const { romanToArabic, arabicToRoman, isValidRoman, isValidArabic } = require('../lib/Convertidor');
 
 // ===== TESTS: ROMANO → ARÁBIGO =====
 describe('Función romanToArabic', () => {
   
   describe('Conversiones básicas', () => {
-    it('debe convertir números simples', () => {
+    test('debe convertir números simples', () => {
       expect(romanToArabic('I')).toBe(1);
       expect(romanToArabic('V')).toBe(5);
       expect(romanToArabic('X')).toBe(10);
@@ -14,7 +14,7 @@ describe('Función romanToArabic', () => {
       expect(romanToArabic('M')).toBe(1000);
     });
 
-    it('debe convertir números aditivos', () => {
+    test('debe convertir números aditivos', () => {
       expect(romanToArabic('II')).toBe(2);
       expect(romanToArabic('III')).toBe(3);
       expect(romanToArabic('VI')).toBe(6);
@@ -26,7 +26,7 @@ describe('Función romanToArabic', () => {
       expect(romanToArabic('XXX')).toBe(30);
     });
 
-    it('debe manejar sustracción correcta (IV, IX, XL, XC, CD, CM)', () => {
+    test('debe manejar sustracción correcta (IV, IX, XL, XC, CD, CM)', () => {
       expect(romanToArabic('IV')).toBe(4);
       expect(romanToArabic('IX')).toBe(9);
       expect(romanToArabic('XL')).toBe(40);
@@ -37,7 +37,7 @@ describe('Función romanToArabic', () => {
   });
 
   describe('Conversiones complejas', () => {
-    it('debe convertir números complejos correctamente', () => {
+    test('debe convertir números complejos correctamente', () => {
       expect(romanToArabic('MCMXCIX')).toBe(1999);
       expect(romanToArabic('MMXXIV')).toBe(2024);
       expect(romanToArabic('MDCCLXXVI')).toBe(1776);
@@ -47,30 +47,30 @@ describe('Función romanToArabic', () => {
   });
 
   describe('Manejo de mayúsculas/minúsculas', () => {
-    it('debe aceptar minúsculas', () => {
+    test('debe aceptar minúsculas', () => {
       expect(romanToArabic('ix')).toBe(9);
       expect(romanToArabic('mcmxcix')).toBe(1999);
     });
 
-    it('debe aceptar mixto de mayúsculas y minúsculas', () => {
+    test('debe aceptar mixto de mayúsculas y minúsculas', () => {
       expect(romanToArabic('MmXxIv')).toBe(2024);
     });
   });
 
   describe('Validaciones y errores', () => {
-    it('debe rechazar caracteres inválidos', () => {
+    test('debe rechazar caracteres inválidos', () => {
       expect(() => romanToArabic('ABC')).toThrow('Caracteres inválidos');
       expect(() => romanToArabic('IXZ')).toThrow('Caracteres inválidos');
       expect(() => romanToArabic('123')).toThrow('Caracteres inválidos');
       expect(() => romanToArabic('IV5')).toThrow('Caracteres inválidos');
     });
 
-    it.skip('debe rechazar cadenas vacías', () => {
+    test.skip('debe rechazar cadenas vacías', () => {
       expect(() => romanToArabic('')).toThrow('vacía');
       expect(() => romanToArabic('   ')).toThrow('vacía');
     });
 
-    it('debe rechazar formato incorrecto (IIII en lugar de IV)', () => {
+    test('debe rechazar formato incorrecto (IIII en lugar de IV)', () => {
       expect(() => romanToArabic('IIII')).toThrow('Formato romano inválido');
       expect(() => romanToArabic('VV')).toThrow('Formato romano inválido');
       expect(() => romanToArabic('XXXX')).toThrow('Formato romano inválido');
@@ -82,7 +82,7 @@ describe('Función romanToArabic', () => {
 describe('Función arabicToRoman', () => {
   
   describe('Conversiones básicas', () => {
-    it('debe convertir números simples', () => {
+    test('debe convertir números simples', () => {
       expect(arabicToRoman(1)).toBe('I');
       expect(arabicToRoman(5)).toBe('V');
       expect(arabicToRoman(10)).toBe('X');
@@ -92,7 +92,7 @@ describe('Función arabicToRoman', () => {
       expect(arabicToRoman(1000)).toBe('M');
     });
 
-    it('debe manejar sustracción (4, 9, 40, 90, 400, 900)', () => {
+    test('debe manejar sustracción (4, 9, 40, 90, 400, 900)', () => {
       expect(arabicToRoman(4)).toBe('IV');
       expect(arabicToRoman(9)).toBe('IX');
       expect(arabicToRoman(40)).toBe('XL');
@@ -103,7 +103,7 @@ describe('Función arabicToRoman', () => {
   });
 
   describe('Conversiones complejas', () => {
-    it('debe convertir números complejos correctamente', () => {
+    test('debe convertir números complejos correctamente', () => {
       expect(arabicToRoman(1999)).toBe('MCMXCIX');
       expect(arabicToRoman(2024)).toBe('MMXXIV');
       expect(arabicToRoman(1776)).toBe('MDCCLXXVI');
@@ -111,7 +111,7 @@ describe('Función arabicToRoman', () => {
       expect(arabicToRoman(3999)).toBe('MMMCMXCIX'); // Máximo
     });
 
-    it('debe manejar casos especiales', () => {
+    test('debe manejar casos especiales', () => {
       expect(arabicToRoman(1)).toBe('I');
       expect(arabicToRoman(3999)).toBe('MMMCMXCIX');
       expect(arabicToRoman(444)).toBe('CDXLIV');
@@ -120,19 +120,19 @@ describe('Función arabicToRoman', () => {
   });
 
   describe('Validaciones y errores', () => {
-    it('debe rechazar números fuera de rango (< 1)', () => {
+    test('debe rechazar números fuera de rango (< 1)', () => {
       expect(() => arabicToRoman(0)).toThrow('mayor que 0');
       expect(() => arabicToRoman(-1)).toThrow('mayor que 0');
       expect(() => arabicToRoman(-100)).toThrow('mayor que 0');
     });
 
-    it('debe rechazar números fuera de rango (> 3999)', () => {
+    test('debe rechazar números fuera de rango (> 3999)', () => {
       expect(() => arabicToRoman(4000)).toThrow('menor o igual a 3999');
       expect(() => arabicToRoman(5000)).toThrow('menor o igual a 3999');
       expect(() => arabicToRoman(10000)).toThrow('menor o igual a 3999');
     });
 
-    it('debe rechazar números decimales', () => {
+    test('debe rechazar números decimales', () => {
       expect(() => arabicToRoman(1.5)).toThrow('entero');
       expect(() => arabicToRoman(3.14)).toThrow('entero');
       expect(() => arabicToRoman(10.99)).toThrow('entero');
@@ -144,13 +144,13 @@ describe('Función arabicToRoman', () => {
 describe('Funciones auxiliares', () => {
   
   describe('isValidRoman', () => {
-    it('debe validar números romanos correctos', () => {
+    test('debe validar números romanos correctos', () => {
       expect(isValidRoman('XIV')).toBe(true);
       expect(isValidRoman('MCMXCIX')).toBe(true);
       expect(isValidRoman('I')).toBe(true);
     });
 
-    it('debe rechazar números romanos incorrectos', () => {
+    test('debe rechazar números romanos incorrectos', () => {
       expect(isValidRoman('ABC')).toBe(false);
       expect(isValidRoman('IIII')).toBe(false);
       expect(isValidRoman('')).toBe(false);
@@ -158,13 +158,13 @@ describe('Funciones auxiliares', () => {
   });
 
   describe('isValidArabic', () => {
-    it('debe validar números válidos', () => {
+    test('debe validar números válidos', () => {
       expect(isValidArabic(1)).toBe(true);
       expect(isValidArabic(1999)).toBe(true);
       expect(isValidArabic(3999)).toBe(true);
     });
 
-    it('debe rechazar números inválidos', () => {
+    test('debe rechazar números inválidos', () => {
       expect(isValidArabic(0)).toBe(false);
       expect(isValidArabic(4000)).toBe(false);
       expect(isValidArabic(1.5)).toBe(false);
@@ -175,7 +175,7 @@ describe('Funciones auxiliares', () => {
 // ===== TESTS DE INTEGRACIÓN: CONVERSIÓN BIDIRECCIONAL =====
 describe('Integración: conversión bidireccional', () => {
   
-  it('debe ser consistente al convertir ida y vuelta', () => {
+  test('debe ser consistente al convertir ida y vuelta', () => {
     // Arábigo → Romano → Arábigo
     const testNumbers = [1, 4, 9, 14, 44, 99, 444, 999, 1444, 1999, 2024, 3999];
     
@@ -186,7 +186,7 @@ describe('Integración: conversión bidireccional', () => {
     });
   });
 
-  it('debe ser consistente al convertir Romano → Arábigo → Romano', () => {
+  test('debe ser consistente al convertir Romano → Arábigo → Romano', () => {
     const testRomans = ['I', 'IV', 'IX', 'XIV', 'XLIV', 'XCIX', 'CDXLIV', 'CMXCIX', 'MCMXLIV', 'MCMXCIX', 'MMXXIV'];
     
     testRomans.forEach(roman => {

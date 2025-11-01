@@ -1,8 +1,7 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { romanToArabic, arabicToRoman } from '../lib/Convertidor';
+const { romanToArabic, arabicToRoman } = require('../lib/Convertidor');
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  // CORS headers (opcional pero recomendado)
+module.exports = async (req, res) => {
+  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -43,9 +42,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
       });
     } catch (error) {
       console.error('Error en conversión romano→arábigo:', error);
-      const message = (error instanceof Error) 
-        ? error.message 
-        : 'Error desconocido al procesar.';
+      const message = error.message || 'Error desconocido al procesar.';
       
       return res.status(400).json({ 
         error: message,
@@ -82,9 +79,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
       });
     } catch (error) {
       console.error('Error en conversión arábigo→romano:', error);
-      const message = (error instanceof Error) 
-        ? error.message 
-        : 'Error desconocido al procesar.';
+      const message = error.message || 'Error desconocido al procesar.';
       
       return res.status(400).json({ 
         error: message,
@@ -101,4 +96,4 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
       'arabigo-a-romano': '/api/index?arabic=14'
     }
   });
-}
+};

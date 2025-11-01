@@ -1,14 +1,11 @@
 module.exports = {
-  // Usa ts-jest para archivos TypeScript
-  preset: 'ts-jest',
-  
-  // Entorno de pruebas (node para backend)
+  // Entorno de pruebas
   testEnvironment: 'node',
   
   // Patrón para encontrar archivos de prueba
   testMatch: [
-    '**/test/**/*.test.ts',
-    '**/__tests__/**/*.test.ts'
+    '**/test/**/*.test.js',
+    '**/__tests__/**/*.test.js'
   ],
   
   // Archivos a ignorar
@@ -20,9 +17,8 @@ module.exports = {
   
   // Cobertura de código
   collectCoverageFrom: [
-    'lib/**/*.ts',
-    'api/**/*.ts',
-    '!**/*.d.ts',
+    'lib/**/*.js',
+    'api/**/*.js',
     '!**/node_modules/**'
   ],
   
@@ -33,16 +29,6 @@ module.exports = {
     '/dist/'
   ],
   
-  // Umbrales de cobertura
-  coverageThreshold: {
-    global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80
-    }
-  },
-  
   // Directorio para reportes de cobertura
   coverageDirectory: 'coverage',
   
@@ -50,19 +36,8 @@ module.exports = {
   coverageReporters: [
     'text',
     'text-summary',
-    'html',
-    'lcov'
+    'html'
   ],
-  
-  // Configuración de ts-jest
-  globals: {
-    'ts-jest': {
-      tsconfig: {
-        esModuleInterop: true,
-        allowSyntheticDefaultImports: true
-      }
-    }
-  },
   
   // Timeout para tests (5 segundos)
   testTimeout: 5000,

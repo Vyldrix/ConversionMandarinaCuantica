@@ -2,7 +2,7 @@
   "name": "conversor-romano-arabigo",
   "version": "1.0.0",
   "description": "Aplicación web para convertir números romanos a arábigos y viceversa",
-  "main": "api/index.ts",
+  "main": "api/index.js",
   "author": "Loyola Lautaro",
   "license": "ISC",
   "engines": {
@@ -13,23 +13,18 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "dev": "vercel dev",
-    "build": "tsc",
-    "type-check": "tsc --noEmit"
+    "deploy": "vercel --prod"
   },
   "keywords": [
     "roman-numerals",
     "converter",
-    "typescript",
+    "javascript",
     "vercel",
     "roman",
-    "arabic"
+    "arabic",
+    "pixel-art"
   ],
   "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "@types/node": "^24.9.1",
-    "@vercel/node": "^5.5.0",
-    "jest": "^30.2.0",
-    "ts-jest": "^29.4.5",
-    "typescript": "^5.9.3"
+    "jest": "^30.2.0"
   }
 }
