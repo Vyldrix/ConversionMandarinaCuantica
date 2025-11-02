@@ -4,29 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor Romano ⇄ Arábigo</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Fondo pixelado estilo Minecraft -->
+    <div class="minecraft-bg">
+        <div class="pixel-block block-1"></div>
+        <div class="pixel-block block-2"></div>
+        <div class="pixel-block block-3"></div>
+        <div class="pixel-block block-4"></div>
+        <div class="pixel-block block-5"></div>
+        <div class="pixel-block block-6"></div>
+    </div>
+    
     <div class="roman-background">
         <div class="pillar pillar-left"></div>
         <div class="pillar pillar-right"></div>
     </div>
     
     <header class="header">
+        <div class="roman-bust left-bust">
+            <div class="bust-base"></div>
+            <div class="laurel-wreath"></div>
+        </div>
         <h1 class="main-title">
+            <span class="pixel-ornament top">▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀</span>
             <span class="latin-text">CONVERSOR</span>
-            <span class="subtitle">Numerorum Romanorum</span>
+            <span class="subtitle">░Numerorum Romanorum░</span>
+            <span class="pixel-ornament bottom">▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span>
         </h1>
+        <div class="roman-bust right-bust">
+            <div class="bust-base"></div>
+            <div class="laurel-wreath"></div>
+        </div>
     </header>
 
     <div class="container">
         <div class="converter-box">
             <div class="box-header">
                 <h2>Romano → Arábigo</h2>
-                <div class="roman-ornament">✦</div>
+                <div class="roman-ornament">◆◆◆</div>
             </div>
             <p class="description">Introduce numerales romanos como <strong>XIV</strong>, <strong>MCMXCIX</strong> o <strong>MMXXIV</strong></p>
             <div class="input-group">
@@ -49,13 +69,13 @@
         </div>
 
         <div class="divider">
-            <div class="divider-ornament">⚜</div>
+            <div class="divider-ornament">█▓▒░ ⚔ ░▒▓█</div>
         </div>
 
         <div class="converter-box">
             <div class="box-header">
                 <h2>Arábigo → Romano</h2>
-                <div class="roman-ornament">✦</div>
+                <div class="roman-ornament">◆◆◆</div>
             </div>
             <p class="description">Introduce números entre <strong>1</strong> y <strong>3999</strong></p>
             <div class="input-group">
@@ -80,8 +100,9 @@
     </div>
 
     <footer class="footer">
-        <p class="latin-quote">"Non scholae sed vitae discimus"</p>
-        <p class="quote-translation">No aprendemos para la escuela, sino para la vida</p>
+        <p class="latin-quote">░▒▓█ "Non scholae sed vitae discimus" █▓▒░</p>
+        <p class="quote-translation">[ No aprendemos para la escuela, sino para la vida ]</p>
+        <div class="pixel-footer">▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀</div>
     </footer>
 
     <script src="script.js"></script>

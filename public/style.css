@@ -1,12 +1,15 @@
-/* ===== VARIABLES Y RESET - PIXEL ART ROMANO ===== */
+/* ===== VARIABLES Y RESET - PIXEL ART ROMANO ÉPICO ===== */
 :root {
     --pixel-gold: #FFD700;
     --pixel-gold-dark: #B8860B;
+    --pixel-bronze: #CD7F32;
     --pixel-red: #DC143C;
     --pixel-red-dark: #8B0000;
+    --pixel-purple: #6B238E;
     --pixel-stone: #696969;
     --pixel-stone-light: #A9A9A9;
-    --pixel-bg: #2C1810;
+    --pixel-marble: #F5F5DC;
+    --pixel-bg: #1a1410;
     --pixel-brown: #4A3C2A;
     --pixel-parchment: #F4E8D0;
     --pixel-cream: #FFF8DC;
@@ -21,17 +24,17 @@
     image-rendering: crisp-edges;
 }
 
-/* ===== BODY Y FONDO PIXELADO ===== */
+/* ===== BODY Y FONDO PIXELADO ÉPICO ===== */
 body {
     font-family: 'Press Start 2P', cursive;
-    background: var(--pixel-bg);
+    background: linear-gradient(135deg, #1a1410 0%, #2d1f15 25%, #1a1410 50%, #3d2a1f 75%, #1a1410 100%);
     color: var(--pixel-stone);
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
 }
 
-/* Patrón de cuadrícula estilo Minecraft */
+/* Patrón de mármol pixelado */
 body::before {
     content: '';
     position: fixed;
@@ -40,8 +43,9 @@ body::before {
     right: 0;
     bottom: 0;
     background-image: 
-        repeating-linear-gradient(0deg, transparent, transparent 16px, rgba(255, 215, 0, 0.03) 16px, rgba(255, 215, 0, 0.03) 17px),
-        repeating-linear-gradient(90deg, transparent, transparent 16px, rgba(255, 215, 0, 0.03) 16px, rgba(255, 215, 0, 0.03) 17px);
+        repeating-linear-gradient(0deg, transparent, transparent 16px, rgba(245, 245, 220, 0.02) 16px, rgba(245, 245, 220, 0.02) 17px),
+        repeating-linear-gradient(90deg, transparent, transparent 16px, rgba(245, 245, 220, 0.02) 16px, rgba(245, 245, 220, 0.02) 17px),
+        repeating-linear-gradient(45deg, transparent, transparent 32px, rgba(255, 215, 0, 0.01) 32px, rgba(255, 215, 0, 0.01) 33px);
     pointer-events: none;
     z-index: 1;
 }
@@ -82,7 +86,7 @@ body::before {
     50% { transform: translateY(-20px) rotate(5deg); }
 }
 
-/* ===== COLUMNAS PIXELADAS ===== */
+/* ===== COLUMNAS ROMANAS PIXELADAS ÉPICAS ===== */
 .roman-background {
     position: fixed;
     top: 0;
@@ -95,18 +99,24 @@ body::before {
 
 .pillar {
     position: absolute;
-    width: 64px;
+    width: 80px;
     height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(184, 134, 11, 0.15) 0px,
-        rgba(184, 134, 11, 0.15) 16px,
-        rgba(255, 215, 0, 0.1) 16px,
-        rgba(255, 215, 0, 0.1) 32px
-    );
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            rgba(245, 245, 220, 0.15) 0px,
+            rgba(245, 245, 220, 0.15) 8px,
+            rgba(205, 127, 50, 0.1) 8px,
+            rgba(205, 127, 50, 0.1) 16px,
+            rgba(255, 215, 0, 0.12) 16px,
+            rgba(255, 215, 0, 0.12) 24px,
+            rgba(245, 245, 220, 0.15) 24px,
+            rgba(245, 245, 220, 0.15) 32px
+        );
     box-shadow: 
-        inset 4px 0 8px rgba(0, 0, 0, 0.4),
-        inset -4px 0 8px rgba(0, 0, 0, 0.4);
+        inset 6px 0 12px rgba(0, 0, 0, 0.5),
+        inset -6px 0 12px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(255, 215, 0, 0.1);
 }
 
 .pillar::before,
@@ -115,34 +125,164 @@ body::before {
     position: absolute;
     left: 0;
     width: 100%;
-    height: 64px;
-    background: repeating-linear-gradient(
-        90deg,
-        rgba(255, 215, 0, 0.3) 0px,
-        rgba(255, 215, 0, 0.3) 8px,
-        rgba(184, 134, 11, 0.3) 8px,
-        rgba(184, 134, 11, 0.3) 16px
-    );
+    height: 80px;
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            rgba(255, 215, 0, 0.4) 0px,
+            rgba(255, 215, 0, 0.4) 4px,
+            rgba(205, 127, 50, 0.3) 4px,
+            rgba(205, 127, 50, 0.3) 8px,
+            rgba(245, 245, 220, 0.35) 8px,
+            rgba(245, 245, 220, 0.35) 12px,
+            rgba(184, 134, 11, 0.3) 12px,
+            rgba(184, 134, 11, 0.3) 16px
+        );
     box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.6),
-        inset 0 2px 0 rgba(255, 255, 255, 0.2);
+        0 4px 16px rgba(0, 0, 0, 0.7),
+        inset 0 2px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.4);
 }
 
-.pillar::before { top: 0; }
-.pillar::after { bottom: 0; }
+.pillar::before { 
+    top: 0;
+    border-bottom: 4px solid rgba(255, 215, 0, 0.5);
+}
+
+.pillar::after { 
+    bottom: 0;
+    border-top: 4px solid rgba(255, 215, 0, 0.5);
+}
 
 .pillar-left { left: 5%; }
 .pillar-right { right: 5%; }
 
-/* ===== HEADER PIXELADO ===== */
+/* ===== HEADER CON BUSTOS ROMANOS (GIGACHADS) ===== */
 .header {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 3rem 1rem 2rem;
+    padding: 4rem 1rem 2rem;
     background: linear-gradient(to bottom, 
+        rgba(107, 35, 142, 0.3),
         rgba(220, 20, 60, 0.2), 
         transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* Bustos Romanos Pixelados */
+.roman-bust {
+    position: relative;
+    width: 80px;
+    height: 100px;
+    animation: bust-glow 3s ease-in-out infinite;
+}
+
+.left-bust {
+    animation-delay: 0s;
+}
+
+.right-bust {
+    animation-delay: 1.5s;
+}
+
+@keyframes bust-glow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+        transform: scale(1);
+    }
+    50% { 
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+        transform: scale(1.05);
+    }
+}
+
+.bust-base {
+    width: 64px;
+    height: 80px;
+    margin: 0 auto 8px;
+    background: linear-gradient(135deg, 
+        var(--pixel-marble) 0%,
+        var(--pixel-stone-light) 50%,
+        var(--pixel-marble) 100%);
+    border: 3px solid var(--pixel-gold);
+    box-shadow: 
+        inset -3px -3px 0 rgba(0, 0, 0, 0.4),
+        inset 3px 3px 0 rgba(255, 255, 255, 0.3),
+        0 8px 16px rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+/* Cara simplificada */
+.bust-base::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, 
+        var(--pixel-stone-light) 0%, 
+        var(--pixel-stone) 100%);
+    border-radius: 50%;
+    box-shadow: 
+        inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+        inset 2px 2px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Barba épica */
+.bust-base::after {
+    content: '▼▼▼';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--pixel-stone);
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Corona de laurel */
+.laurel-wreath {
+    width: 70px;
+    height: 16px;
+    margin: 0 auto;
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 4px,
+            rgba(34, 139, 34, 0.6) 4px,
+            rgba(34, 139, 34, 0.6) 8px
+        );
+    border: 2px solid rgba(34, 139, 34, 0.8);
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(144, 238, 144, 0.4);
+    position: relative;
+}
+
+.laurel-wreath::before,
+.laurel-wreath::after {
+    content: '🌿';
+    position: absolute;
+    font-size: 12px;
+    filter: grayscale(0.3);
+}
+
+.laurel-wreath::before {
+    left: -8px;
+    top: -2px;
+}
+
+.laurel-wreath::after {
+    right: -8px;
+    top: -2px;
 }
 
 .main-title {
@@ -421,24 +561,97 @@ input::placeholder {
     text-shadow: 2px 2px 0 var(--pixel-gold-dark);
 }
 
-/* ===== FOOTER PIXELADO ===== */
+/* ===== FOOTER CON COLUMNAS DECORATIVAS ===== */
 .footer {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 2rem 1rem 3rem;
+    padding: 3rem 1rem 3rem;
     background: linear-gradient(to top, 
+        rgba(107, 35, 142, 0.3),
         rgba(220, 20, 60, 0.2), 
         transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.footer-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+/* Columnas decorativas en el footer */
+.column-decoration {
+    width: 48px;
+    height: 120px;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            rgba(245, 245, 220, 0.3) 0px,
+            rgba(245, 245, 220, 0.3) 4px,
+            rgba(205, 127, 50, 0.2) 4px,
+            rgba(205, 127, 50, 0.2) 8px
+        );
+    border: 3px solid var(--pixel-bronze);
+    box-shadow: 
+        inset -2px -2px 0 rgba(0, 0, 0, 0.4),
+        inset 2px 2px 0 rgba(255, 255, 255, 0.2),
+        0 4px 12px rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+.column-decoration::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -6px;
+    right: -6px;
+    height: 12px;
+    background: var(--pixel-gold);
+    border: 2px solid var(--pixel-gold-dark);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.column-decoration::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: -6px;
+    right: -6px;
+    height: 12px;
+    background: var(--pixel-gold);
+    border: 2px solid var(--pixel-gold-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .latin-quote {
     font-family: 'Press Start 2P', cursive;
-    font-size: clamp(0.5rem, 1.2vw, 0.8rem);
+    font-size: clamp(0.6rem, 1.5vw, 1rem);
     color: var(--pixel-gold);
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 0 var(--pixel-gold-dark);
-    line-height: 1.8;
+    text-shadow: 
+        3px 3px 0 var(--pixel-gold-dark),
+        6px 6px 0 rgba(0, 0, 0, 0.5);
+    line-height: 2;
+    animation: epic-glow 4s ease-in-out infinite;
+}
+
+@keyframes epic-glow {
+    0%, 100% { 
+        text-shadow: 
+            3px 3px 0 var(--pixel-gold-dark),
+            6px 6px 0 rgba(0, 0, 0, 0.5),
+            0 0 20px rgba(255, 215, 0, 0.3);
+    }
+    50% { 
+        text-shadow: 
+            3px 3px 0 var(--pixel-gold-dark),
+            6px 6px 0 rgba(0, 0, 0, 0.5),
+            0 0 40px rgba(255, 215, 0, 0.6),
+            0 0 60px rgba(255, 215, 0, 0.4);
+    }
 }
 
 .quote-translation {
@@ -459,7 +672,18 @@ input::placeholder {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .pillar {
-        width: 32px;
+        width: 40px;
+    }
+    
+    .roman-bust,
+    .column-decoration {
+        display: none;
+    }
+    
+    .header,
+    .footer {
+        flex-direction: column;
+        gap: 1rem;
     }
     
     .converter-box {
@@ -484,11 +708,17 @@ input::placeholder {
         font-size: 0.6rem;
         letter-spacing: 0.2rem;
     }
+    
+    .latin-quote {
+        font-size: 0.5rem;
+    }
 }
 
 @media (max-width: 480px) {
     .pillar,
-    .pixel-block {
+    .pixel-block,
+    .roman-bust,
+    .column-decoration {
         display: none;
     }
     
@@ -510,6 +740,11 @@ input::placeholder {
     
     .result-value {
         font-size: 0.9rem;
+    }
+    
+    .latin-quote {
+        font-size: 0.4rem;
+        line-height: 1.6;
     }
 }
 
