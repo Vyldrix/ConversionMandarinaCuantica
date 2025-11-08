@@ -65,15 +65,17 @@ module.exports = async (req, res) => {
   } catch (error) {
     console.error('Error en conversion arabigo->romano:', error.message);
     
-    // Clasificar el tipo de error segun el mensaje
     const errorMessage = error.message || 'Error desconocido';
     
-    // 422 Unprocessable Entity - Errores de regla de negocio
+    // 422 Unprocessable Entity - TODOS los errores de Convertidor.js son reglas de negocio
+    // Si llegamos aca es porque el numero parseó correctamente pero viola reglas de negocio
+    
     if (
       errorMessage.includes('entero') ||
       errorMessage.includes('mayor que 0') ||
       errorMessage.includes('menor o igual a 3999') ||
-      errorMessage.includes('fuera del rango')
+      errorMessage.includes('fuera del rango') ||
+      errorMessage.includes('decimales')
     ) {
       return res.status(422).json({ 
         error: 'Numero arabico invalido.',
@@ -82,20 +84,12 @@ module.exports = async (req, res) => {
       });
     }
     
-    // 400 Bad Request - Errores de validacion basica
-    if (errorMessage.includes('debe ser')) {
-      return res.status(400).json({ 
-        error: 'Parametro arabic invalido.',
-        input: arabicNumber,
-        details: errorMessage
-      });
-    }
-    
-    // 500 Internal Server Error - Cualquier otro error inesperado
-    return res.status(500).json({ 
-      error: 'Error interno del servidor',
-      message: errorMessage,
-      input: arabicNumber
+    // Por defecto, cualquier error del Convertidor es 422
+    // porque ya validamos NaN y presencia arriba
+    return res.status(422).json({ 
+      error: 'Numero arabico invalido.',
+      input: arabicNumber,
+      details: errorMessage
     });
   }
 };

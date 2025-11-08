@@ -62,16 +62,25 @@ module.exports = async (req, res) => {
   } catch (error) {
     console.error('Error en conversion romano->arabigo:', error.message);
     
-    // Clasificar el tipo de error segun el mensaje
     const errorMessage = error.message || 'Error desconocido';
     
-    // 422 Unprocessable Entity - Errores de regla de negocio
+    // 422 Unprocessable Entity - TODOS los errores de Convertidor.js son reglas de negocio
+    // Excepto los que son claramente de validacion basica (null, undefined, tipo incorrecto)
+    
+    // Si el error menciona cualquiera de estas cosas, es un error 422 (regla de negocio):
     if (
       errorMessage.includes('Caracteres invalidos') ||
+      errorMessage.includes('Caracteres inválidos') ||
       errorMessage.includes('Formato romano invalido') ||
+      errorMessage.includes('Formato romano inválido') ||
       errorMessage.includes('fuera del rango') ||
       errorMessage.includes('vacia') ||
-      errorMessage.includes('no es la representacion correcta')
+      errorMessage.includes('vacía') ||
+      errorMessage.includes('no es la representacion correcta') ||
+      errorMessage.includes('no es la representación correcta') ||
+      errorMessage.includes('Solo se permiten') ||
+      errorMessage.includes('representacion correcta') ||
+      errorMessage.includes('representación correcta')
     ) {
       return res.status(422).json({ 
         error: 'Numero romano invalido.',
@@ -80,9 +89,10 @@ module.exports = async (req, res) => {
       });
     }
     
-    // 400 Bad Request - Errores de validacion basica
+    // 400 Bad Request - Errores de validacion muy basica
     if (
       errorMessage.includes('cadena de texto valida') ||
+      errorMessage.includes('cadena de texto válida') ||
       errorMessage.includes('proporcionar')
     ) {
       return res.status(400).json({ 
@@ -92,11 +102,12 @@ module.exports = async (req, res) => {
       });
     }
     
-    // 500 Internal Server Error - Cualquier otro error inesperado
-    return res.status(500).json({ 
-      error: 'Error interno del servidor',
-      message: errorMessage,
-      input: romanNumeral
+    // Por defecto, asumimos que cualquier error del Convertidor es 422 (regla de negocio)
+    // porque ya validamos tipo y presencia arriba
+    return res.status(422).json({ 
+      error: 'Numero romano invalido.',
+      input: romanNumeral,
+      details: errorMessage
     });
   }
 };
