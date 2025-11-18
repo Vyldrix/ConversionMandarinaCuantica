@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
     
     // Verificacion adicional por si la funcion retorna null
     if (romanNumeral === null || romanNumeral === undefined) {
-      return res.status(422).json({ 
+      return res.status(400).json({ 
         error: 'Numero arabico invalido.',
         input: arabicNumber,
         reason: 'La conversion retorno un valor nulo o indefinido'
@@ -67,26 +67,9 @@ module.exports = async (req, res) => {
     
     const errorMessage = error.message || 'Error desconocido';
     
-    // 422 Unprocessable Entity - TODOS los errores de Convertidor.js son reglas de negocio
-    // Si llegamos aca es porque el numero parseó correctamente pero viola reglas de negocio
-    
-    if (
-      errorMessage.includes('entero') ||
-      errorMessage.includes('mayor que 0') ||
-      errorMessage.includes('menor o igual a 3999') ||
-      errorMessage.includes('fuera del rango') ||
-      errorMessage.includes('decimales')
-    ) {
-      return res.status(422).json({ 
-        error: 'Numero arabico invalido.',
-        input: arabicNumber,
-        details: errorMessage
-      });
-    }
-    
-    // Por defecto, cualquier error del Convertidor es 422
-    // porque ya validamos NaN y presencia arriba
-    return res.status(422).json({ 
+    // TODOS los errores de validación de rango o formato son 400
+    // porque son errores en la entrada del usuario
+    return res.status(400).json({ 
       error: 'Numero arabico invalido.',
       input: arabicNumber,
       details: errorMessage

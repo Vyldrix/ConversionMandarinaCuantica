@@ -45,7 +45,7 @@ module.exports = async (req, res) => {
     
     // Verificacion adicional por si la funcion retorna null
     if (arabicNumber === null || arabicNumber === undefined) {
-      return res.status(422).json({ 
+      return res.status(400).json({ 
         error: 'Numero romano invalido.',
         input: romanNumeral,
         reason: 'La conversion retorno un valor nulo o indefinido'
@@ -64,47 +64,9 @@ module.exports = async (req, res) => {
     
     const errorMessage = error.message || 'Error desconocido';
     
-    // 422 Unprocessable Entity - TODOS los errores de Convertidor.js son reglas de negocio
-    // Excepto los que son claramente de validacion basica (null, undefined, tipo incorrecto)
-    
-    // Si el error menciona cualquiera de estas cosas, es un error 422 (regla de negocio):
-    if (
-      errorMessage.includes('Caracteres invalidos') ||
-      errorMessage.includes('Caracteres inválidos') ||
-      errorMessage.includes('Formato romano invalido') ||
-      errorMessage.includes('Formato romano inválido') ||
-      errorMessage.includes('fuera del rango') ||
-      errorMessage.includes('vacia') ||
-      errorMessage.includes('vacía') ||
-      errorMessage.includes('no es la representacion correcta') ||
-      errorMessage.includes('no es la representación correcta') ||
-      errorMessage.includes('Solo se permiten') ||
-      errorMessage.includes('representacion correcta') ||
-      errorMessage.includes('representación correcta')
-    ) {
-      return res.status(422).json({ 
-        error: 'Numero romano invalido.',
-        input: romanNumeral,
-        details: errorMessage
-      });
-    }
-    
-    // 400 Bad Request - Errores de validacion muy basica
-    if (
-      errorMessage.includes('cadena de texto valida') ||
-      errorMessage.includes('cadena de texto válida') ||
-      errorMessage.includes('proporcionar')
-    ) {
-      return res.status(400).json({ 
-        error: 'Parametro roman invalido.',
-        input: romanNumeral,
-        details: errorMessage
-      });
-    }
-    
-    // Por defecto, asumimos que cualquier error del Convertidor es 422 (regla de negocio)
-    // porque ya validamos tipo y presencia arriba
-    return res.status(422).json({ 
+    // TODOS los errores de validación de formato romano son 400
+    // porque son errores en la entrada del usuario
+    return res.status(400).json({ 
       error: 'Numero romano invalido.',
       input: romanNumeral,
       details: errorMessage
