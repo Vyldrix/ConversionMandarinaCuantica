@@ -31,9 +31,18 @@ module.exports = async (req, res) => {
     });
   }
 
+  // Validar que el parametro sea SOLO digitos (opcionalmente con signo negativo)
+  if (!/^-?\d+$/.test(arabicParam)) {
+    return res.status(400).json({ 
+      error: 'El parametro "arabic" debe ser un numero valido.',
+      input: arabicParam,
+      received_type: typeof arabicParam
+    });
+  }
+
   const arabicNumber = parseInt(arabicParam, 10);
 
-  // 400 Bad Request - Debe ser un numero valido
+  // 400 Bad Request - Debe ser un numero valido (por si acaso)
   if (isNaN(arabicNumber)) {
     return res.status(400).json({ 
       error: 'El parametro "arabic" debe ser un numero valido.',
